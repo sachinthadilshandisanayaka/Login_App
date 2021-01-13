@@ -3,15 +3,17 @@ package com.dissanayake.firebasedemo
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        Log.i("Test 04 :", "OK")
         findViewById<Button>(R.id.button5).setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             Toast.makeText(this, "Login success", Toast.LENGTH_SHORT).show()
@@ -19,5 +21,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(navToStartActivity)
             finish()
         }
+//        FirebaseDatabase.getInstance().getReference().child("employee").child("customer").setValue("John Doe")
     }
 }
