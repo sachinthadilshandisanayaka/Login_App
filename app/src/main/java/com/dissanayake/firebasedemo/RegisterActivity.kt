@@ -1,5 +1,6 @@
 package com.dissanayake.firebasedemo
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -39,6 +40,9 @@ class RegisterActivity : AppCompatActivity() {
             if(it.isSuccessful) {
                 Snackbar.make(view, "Registration success", Snackbar.LENGTH_SHORT)
                     .show()
+                val navToMainActivity = Intent(this, MainActivity::class.java)
+                startActivity(navToMainActivity)
+                finish()
             } else {
                 Snackbar.make(view, "Registration failed", Snackbar.LENGTH_SHORT)
                     .show()

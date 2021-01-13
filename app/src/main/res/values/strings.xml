@@ -2,4 +2,7 @@
     <string name="app_name">FireBaseDemo</string>
     <string name="registerButton">Register</string>
     <string name="loginButton">Login</string>
+    <string name="logout">Logout</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>
