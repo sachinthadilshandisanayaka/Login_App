@@ -13,11 +13,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.i("Test 04 :", "OK")
+        Log.i("Test Main 04 :", "OK")
         findViewById<Button>(R.id.button5).setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-            Toast.makeText(this, "Login success", Toast.LENGTH_SHORT).show()
-            val navToStartActivity = Intent(this, StartActivity::class.java)
+            Toast.makeText(this@MainActivity, "Login success", Toast.LENGTH_SHORT).show()
+            val navToStartActivity = Intent(this@MainActivity, StartActivity::class.java)
             startActivity(navToStartActivity)
             finish()
         }
