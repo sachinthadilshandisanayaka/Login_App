@@ -48,5 +48,10 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+        findViewById<Button>(R.id.button7).setOnClickListener {
+            val navToAddItemActivity = Intent(this, AddItemActivity::class.java)
+            startActivity(navToAddItemActivity)
+            finish()
+        }
     }
 }
