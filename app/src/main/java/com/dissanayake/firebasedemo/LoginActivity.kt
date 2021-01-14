@@ -35,16 +35,20 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun userLogin(email: String, password: String) {
-        auth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener { task ->
-            if(task.isSuccessful) {
-                Log.i("Test 03 :", "OK")
-                Toast.makeText(this@LoginActivity, "Login success", Toast.LENGTH_SHORT).show()
-                val navToMainActivity = Intent(this@LoginActivity, MainActivity::class.java)
-                startActivity(navToMainActivity)
-                finish()
-            } else {
-                Toast.makeText(this@LoginActivity, "Login error", Toast.LENGTH_SHORT).show()
+        try {
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+                if(task.isSuccessful) {
+                    Log.i("Test 03 :", "OK")
+                    Toast.makeText(this, "Login success", Toast.LENGTH_SHORT).show()
+                    val navToMainActivity = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(navToMainActivity)
+                    finish()
+                } else {
+                    Toast.makeText(this@LoginActivity, "Login error", Toast.LENGTH_SHORT).show()
+                }
             }
+        } catch (e: Exception) {
+            Log.i("Error :", e.toString())
         }
     }
 }

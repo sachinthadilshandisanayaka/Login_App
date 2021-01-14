@@ -19,6 +19,5 @@ class StartActivity : AppCompatActivity() {
             val navToLoginActivity = Intent(this, LoginActivity::class.java)
             startActivity(navToLoginActivity)
         }
-
     }
 }

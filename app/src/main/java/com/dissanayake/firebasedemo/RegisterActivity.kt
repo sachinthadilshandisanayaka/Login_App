@@ -58,14 +58,16 @@ class RegisterActivity : AppCompatActivity() {
                     userHashMap["username"] = username
 
                     refUsers.updateChildren(userHashMap)
-                            .addOnCompleteListener { task ->
+                            .addOnCompleteListener { tasks ->
                                 Log.i("Message 02 :", "OK")
-                                if(task.isSuccessful) {
+                                if(tasks.isSuccessful) {
                                     Log.i("Message 03 :", "OK")
                                     Toast.makeText(this, "Register success", Toast.LENGTH_SHORT).show()
                                     val navToMainActivity = Intent(this, MainActivity::class.java)
                                     startActivity(navToMainActivity)
                                     finish()
+                                } else {
+                                    Toast.makeText(this, "Registration success but data input error", Toast.LENGTH_SHORT).show()
                                 }
                             }
                 } else {
