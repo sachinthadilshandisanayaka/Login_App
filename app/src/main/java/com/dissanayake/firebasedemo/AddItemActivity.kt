@@ -13,10 +13,10 @@ import java.lang.NullPointerException
 class AddItemActivity : AppCompatActivity() {
 
     private lateinit var refUsers: DatabaseReference
-    private lateinit var listItemActivity: ListView
+    private lateinit var listItemActivity: ListView // here
     override fun onCreate(savedInstanceState: Bundle?) {
         try {
-            listItemActivity = findViewById<ListView>(R.id.list_items) //
+            listItemActivity = findViewById<ListView>(R.id.list_items)  // here
         } catch (e: NullPointerException) {
             Log.i("Error", e.toString())
         }
@@ -27,7 +27,7 @@ class AddItemActivity : AppCompatActivity() {
 
         val listItem = ArrayList<String>()
         val adapter:ArrayAdapter<String> = ArrayAdapter(this, R.layout.list_view, listItem)
-        listItemActivity.adapter = adapter
+        listItemActivity.adapter = adapter      // Error = listItemActivity must not be null
 
         refUsers = FirebaseDatabase.getInstance("https://androidapptest-8b7ac-default-rtdb.firebaseio.com/").reference.child("products")
         refUsers.addValueEventListener(object : ValueEventListener {
