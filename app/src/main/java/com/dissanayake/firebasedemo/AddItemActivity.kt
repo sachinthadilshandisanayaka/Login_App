@@ -1,48 +1,49 @@
 package com.dissanayake.firebasedemo
 
-import android.app.Activity
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.ListView
-
+import android.widget.TextView
+import com.dissanayake.firebasedemo.R
 import com.google.firebase.database.*
-import java.lang.NullPointerException
 
 class AddItemActivity : AppCompatActivity() {
 
     private lateinit var refUsers: DatabaseReference
-    private lateinit var listItemActivity: ListView // here
+   // here
     override fun onCreate(savedInstanceState: Bundle?) {
-        try {
-            listItemActivity = findViewById<ListView>(R.id.list_items)  // here
-        } catch (e: NullPointerException) {
-            Log.i("Error", e.toString())
-        }
 
+//        var listItemActivity = openDialog.findViewById<ListView>(R.id.list_items)  // here
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_item)
 
+       var listItemActivity = findViewById<ListView>(R.id.list_items_show)  // here
 
         val listItem = ArrayList<String>()
-        val adapter:ArrayAdapter<String> = ArrayAdapter(this, R.layout.list_view, listItem)
-        listItemActivity.adapter = adapter      // Error = listItemActivity must not be null
+        val ListAdapter: ArrayAdapter<String> = ArrayAdapter(this@AddItemActivity, android.R.layout.simple_list_item_1, listItem)
+        listItemActivity?.adapter = ListAdapter      // Error = listItemActivity must not be null
 
-        refUsers = FirebaseDatabase.getInstance("https://androidapptest-8b7ac-default-rtdb.firebaseio.com/").reference.child("products")
-        refUsers.addValueEventListener(object : ValueEventListener {
+        this.refUsers = FirebaseDatabase.getInstance("https://androidapptest-8b7ac-default-rtdb.firebaseio.com/").reference.child("products")
+        this.refUsers.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot){
+                Log.i("Test 01 :", "Done")
                 listItem.clear()
                 for (snapshot:DataSnapshot in dataSnapshot.children) {
                     listItem.add(snapshot.value.toString())
+                    Log.i("Data Retrieve :",listItem.toString())
                 }
-                adapter.notifyDataSetChanged()
+                ListAdapter.notifyDataSetChanged()
             }
             override fun onCancelled(error: DatabaseError) {
                 // Failed to read value
-                Log.w("Error :", "Failed to read value.", error.toException())
+                Log.i("Error :", "Failed to read value.", error.toException())
             }
         })
+//        refUsers.addValueEventListener(getData)
+//        refUsers.addListenerForSingleValueEvent(getData)
 
     }
 }
