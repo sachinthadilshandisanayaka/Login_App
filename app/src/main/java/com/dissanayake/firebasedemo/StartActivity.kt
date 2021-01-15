@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class StartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,6 +20,14 @@ class StartActivity : AppCompatActivity() {
         findViewById<Button>(R.id.button2).setOnClickListener {
             val navToLoginActivity = Intent(this, LoginActivity::class.java)
             startActivity(navToLoginActivity)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val user: FirebaseUser? = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            startActivity(Intent(this@StartActivity, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK))
         }
     }
 }

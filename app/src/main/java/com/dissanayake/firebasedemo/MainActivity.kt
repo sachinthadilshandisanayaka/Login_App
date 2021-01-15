@@ -10,6 +10,9 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
+import kotlin.collections.HashMap
 
 class MainActivity : AppCompatActivity() {
     private lateinit var refUsers: DatabaseReference
@@ -53,5 +56,30 @@ class MainActivity : AppCompatActivity() {
             startActivity(navToAddItemActivity)
             finish()
         }
+        val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+        var city: HashMap<String, String> = HashMap<String, String>()
+        city.put("name", "kanthale")
+        city.put("state", "497 main street")
+        city.put("Country", "Sri Lanka")
+
+        val addOnCompleteListener =
+            db.collection("cities").document("JSR").set(city).addOnCompleteListener {
+
+                if (it.isSuccessful) {
+                    ToastMessage("Values added successfully")
+                }
+            }
+
+    }
+    private fun ToastMessage(value: String) {
+        Toast.makeText(this, value, Toast.LENGTH_SHORT).show()
     }
 }
+
+
+
+
+
+
+
+

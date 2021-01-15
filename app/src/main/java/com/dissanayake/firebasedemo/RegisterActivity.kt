@@ -27,9 +27,9 @@ class RegisterActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.button3).setOnClickListener {
             Log.i("Message 04 :", "OK")
-            var userEmail = findViewById<EditText>(R.id.editTextTextPersonName).text.toString()
-            var userPassword = findViewById<EditText>(R.id.editTextTextPersonName2).text.toString()
-            var username = findViewById<EditText>(R.id.editTextTextPersonName6).text.toString()
+            val userEmail = findViewById<EditText>(R.id.editTextTextPersonName).text.toString()
+            val userPassword = findViewById<EditText>(R.id.editTextTextPersonName2).text.toString()
+            val username = findViewById<EditText>(R.id.editTextTextPersonName6).text.toString()
 
             if (TextUtils.isEmpty(userEmail) || TextUtils.isEmpty(userPassword) || TextUtils.isEmpty(username)) {
                 Log.i("Message 05 :", "OK")
