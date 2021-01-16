@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.dissanayake.firebasedemo.cloudFireStore.CloudFireStoreActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -59,62 +60,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(navToAddItemActivity)
             finish()
         }
-        val db: FirebaseFirestore = FirebaseFirestore.getInstance()
-
-        // add data
-        val city: HashMap<String, Any> = HashMap()
-        city["name"] = "kanthale"
-        city["state"] = "497 main street"
-        city["Country"] = "Sri Lanka"
-
-        addFireStore(db, city)
-
-        // merge data
-        val data: HashMap<String, Any> = HashMap()
-        data["Telephone"] = "0112321232"
-
-        mergeFireStore(db, data)
-
-        // add with uniq id
-        val data2: HashMap<String, Any> = HashMap()
-        data2["name"] = "Lahiru"
-        data2["city"] = "Kandy"
-
-        addWithUniId(db, data2)
-
-        // update
-        updateFireStore(db, "Telephone", "0711427041")
-    }
-    private fun addFireStore(db: FirebaseFirestore, city: HashMap<String, Any>) {
-
-        db.collection("cities").document("JSR").set(city).addOnCompleteListener {
-            if (it.isSuccessful) {
-                ToastMessage("Values added successfully")
-            }
+        findViewById<Button>(R.id.button9).setOnClickListener {
+            startActivity(Intent(this, CloudFireStoreActivity::class.java))
+            finish()
         }
-    }
 
-    private fun mergeFireStore(db: FirebaseFirestore, data: HashMap<String, Any>) {
-        db.collection("cities").document("JSR").set(data, SetOptions.merge()).addOnCompleteListener {
-            if(it.isSuccessful) {
-                ToastMessage("Value merge successfully")
-            }
-        }
     }
-
-    private fun addWithUniId(db: FirebaseFirestore, data: HashMap<String, Any>) {
-        db.collection("cities").add(data).addOnCompleteListener {
-            if(it.isSuccessful) {
-                ToastMessage("Value add with uniq ID")
-            }
-        }
-    }
-
-    private fun updateFireStore(db: FirebaseFirestore, field: String, value: String) {
-        var df: DocumentReference = db.collection("cities").document("JSR")
-        df.update(field, value)
-    }
-
     private fun ToastMessage(value: String) {
         Toast.makeText(this, value, Toast.LENGTH_SHORT).show()
     }
